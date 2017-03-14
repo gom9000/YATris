@@ -1,0 +1,13 @@
+-----------------------------------------------------------------------------
+- YaTris: TODO
+-----------------------------------------------------------------------------
+
+- how to load a font from the resource file?
+
+- add audio: start game, chalk drawing, win/lose.
+
+- time sleep between moves.
+
+- draw chalk perspective.
+
+-----------------------------------------------------------------------------

@@ -1,0 +1,77 @@
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+# @(#)makefile.mingw32 1.0  2008/09/29
+#   ________        _________________.________
+#  /  _____/  ____ /   _____/   __   \   ____/
+# /   \  ___ /  _ \\_____  \\____    /____  \
+# \    \_\  (  <_> )        \  /    //       \
+#  \______  /\____/_______  / /____//______  /
+#         \/              \/               \/
+# Copyright (c) 2008 by
+# Alessandro Fraschetti (gos95@gommagomma.net)
+#
+# Project...: YATris - Yet Another Tris
+# Module....: Makefile for MingW32 compiler
+# Author....: Alessandro Fraschetti
+# Notes.....:
+#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+
+TARGET  = YATris
+
+
+SRCPATH = src
+RESPATH = res
+OBJPATH = obj
+RELPATH = release
+
+
+CC      = gcc
+WINDRES = windres
+RM      = rm -f
+CP      = cp
+ZIP     = pkzip
+
+
+CFLAGS  = -pipe -Wall -g0 -O2 -frtti -fexceptions
+LDFLAGS = -pipe -s -mwindows -lcomctl32
+
+
+BIN  = $(TARGET).exe
+OBJ  = $(OBJPATH)/tris.o $(OBJPATH)/options.o $(OBJPATH)/board.o $(OBJPATH)/init.o $(OBJPATH)/move.o
+ROBJ = $(OBJPATH)/resource.o
+
+
+
+all: $(RELPATH)/$(BIN)
+	$(CP) $(TARGET).txt $(RELPATH)/$(TARGET).txt
+	$(CP) license.txt $(RELPATH)/license.txt
+	$(ZIP) $(RELPATH)/ytrissrc.zip *.*
+	$(ZIP) -aP $(RELPATH)/ytrissrc.zip $(RESPATH)/*.*
+	$(ZIP) -aP $(RELPATH)/ytrissrc.zip $(SRCPATH)/*.*
+
+
+.PHONY: clean
+clean: $(RM) $(OBJ) $(ROBJ)
+
+
+$(RELPATH)/$(BIN): $(OBJ) $(ROBJ)
+	$(CC) -o $(RELPATH)/$(BIN) $(OBJ) $(ROBJ) $(LDFLAGS)
+
+
+$(OBJPATH)/tris.o: $(SRCPATH)/tris.cpp $(SRCPATH)/tris.h
+	$(CC) -c $(SRCPATH)/tris.cpp -o $(OBJPATH)/tris.o $(CFLAGS)
+
+$(OBJPATH)/options.o: $(SRCPATH)/options.cpp $(SRCPATH)/tris.h
+	$(CC) -c $(SRCPATH)/options.cpp -o $(OBJPATH)/options.o $(CFLAGS)
+
+$(OBJPATH)/board.o: $(SRCPATH)/board.cpp $(SRCPATH)/tris.h
+	$(CC) -c $(SRCPATH)/board.cpp -o $(OBJPATH)/board.o $(CFLAGS)
+
+$(OBJPATH)/init.o: $(SRCPATH)/init.cpp $(SRCPATH)/tris.h
+	$(CC) -c $(SRCPATH)/init.cpp -o $(OBJPATH)/init.o $(CFLAGS)
+
+$(OBJPATH)/move.o: $(SRCPATH)/move.cpp $(SRCPATH)/tris.h
+	$(CC) -c $(SRCPATH)/move.cpp -o $(OBJPATH)/move.o $(CFLAGS)
+
+$(OBJPATH)/resource.o: $(SRCPATH)/tris.rc $(SRCPATH)/resource.h
+	@$(WINDRES) -o $(OBJPATH)/resource.o $(SRCPATH)/tris.rc
