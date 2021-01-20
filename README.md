@@ -1,7 +1,7 @@
 YATris - Yet Another Tris Implementation
 ----------------------------------------
 
-![YATris.jpg](YATris.jpg)
+![YATris.png](YATris.png)
 
 
 ## DESCRIPTION
