@@ -11,12 +11,6 @@ YATris - Yet Another Tris Implementation
 	human vs computer, human vs human and computer vs computer.
 
 
-## DOWNLOAD:
-
-    The binary and source dist is available at:
-	    http://www.gommagomma.net/gos95/YATris.
-
-
 ## DISTRIBUTION FILES:
 
     YATris.exe      the program executable file
@@ -36,7 +30,7 @@ YATris - Yet Another Tris Implementation
 	    <http://www.gnu.org/licenses/>.
 
 
-# CHANGES
+## CHANGES
 
     Changes in Version 0.1 (2008-07-29)
      - This was the first version.
